@@ -7,16 +7,25 @@ class Program
 
     static void Main()
     {
-        Random rnd = new Random();
-        Console.Write("Масив: ");
-
-        
+        Console.WriteLine("Введіть 10 цілих чисел у діапазоні (0 - 25):");
         for (int i = 0; i < arr.Length; i++)
         {
-            arr[i] = rnd.Next(0, 26);
-            Console.Write(arr[i] + " ");
+            int num;
+            while (true)
+            {
+                Console.Write($"Елемент {i + 1}: ");
+                if (int.TryParse(Console.ReadLine(), out num) && num >= 0 && num <= 25)
+                {
+                    arr[i] = num;
+                    break;
+                }
+                Console.WriteLine("Помилка! Введіть число від 0 до 25.");
+            }
         }
-        Console.WriteLine("\n");
+
+        foreach (var num in arr)
+            Console.Write(num + " ");
+        Console.WriteLine();
 
         Thread T0 = new Thread(PrintGreaterThan10);
         Thread T1 = new Thread(PrintAverage);
